@@ -1,0 +1,61 @@
+<mat-card class="add-sensor-card">
+    <mat-card-title class="card-title">הוספת חיישן חדש</mat-card-title>
+    
+    <mat-card-content>
+      <div class="form-container">
+        <!-- שם מכשיר (אתר) -->
+        <mat-form-field class="full-width">
+          <mat-label>שם מכשיר (אתר)</mat-label>
+          <input matInput [(ngModel)]="newSensor.WebSiteDeviceName">
+        </mat-form-field>
+  
+        <!-- סוג מכשיר -->
+        <mat-form-field class="full-width">
+          <mat-label>סוג מכשיר</mat-label>
+          <input matInput [(ngModel)]="newSensor.DeviceTypeHebrew">
+        </mat-form-field>
+  
+        <!-- סוג מכשיר (אנגלית) -->
+        <mat-form-field class="full-width">
+          <mat-label>סוג מכשיר (אנגלית)</mat-label>
+          <input
+            matInput
+            [(ngModel)]="newSensor.DeviceType"
+            (keypress)="allowOnlyEnglishLetters($event)"
+          >
+        </mat-form-field>
+  
+        <!-- סטטוס -->
+        <div class="status-container">
+          <label class="status-label">סטטוס</label>
+          <mat-radio-group [(ngModel)]="newSensor.DeviceOK">
+            <mat-radio-button [value]="1">תקין</mat-radio-button>
+            <mat-radio-button [value]="0">לא תקין</mat-radio-button>
+          </mat-radio-group>
+        </div>
+  
+        <!-- בחר תמונה -->
+        <mat-form-field class="full-width">
+          <mat-label>בחר תמונה</mat-label>
+          <select matNativeControl [(ngModel)]="newSensor.Picture" name="picture">
+            <option value="" selected></option> <!-- אופציה ריקה ברירת מחדל -->
+            <option *ngFor="let image of imageNames" [value]="image.value">
+              <img [src]="'assets/sensors/' + image.value + '.png'" alt="תמונה" width="50" height="50"> 
+              
+              {{ image.viewValue }}
+            </option>
+          </select>
+        </mat-form-field>
+        
+        <p class="selected-image-text">תמונה שנבחרה: {{newSensor.Picture}}</p>
+        <img *ngIf="newSensor.Picture!='default'"[src]="'assets/sensors/' + newSensor.Picture + '.png'" alt="תמונה" width="50" height="50"> 
+
+        <!-- כפתורים -->
+        <div class="button-container">
+          <button mat-raised-button color="warn" (click)="onCancel()">ביטול</button>
+          <button mat-raised-button color="primary" (click)="saveSensor()">שמירה</button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  

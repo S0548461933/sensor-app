@@ -1,0 +1,59 @@
+.add-sensor-card {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  .status-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .status-label {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .selected-image-text {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  button {
+    width: 48%;
+  }
+  
+  mat-radio-group {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+  
+  mat-radio-button {
+    display: flex;
+    align-items: center;
+  }
+  

@@ -1,0 +1,95 @@
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .sensor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 15px;
+    justify-content: center;
+  }
+  
+  .sensor-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ccc;
+    min-height: 150px;
+  }
+  
+  .sensor-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .sensor-image {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+  }
+  
+  .sensor-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  /* .sensor-status {
+    margin: 10px 0;
+  } */
+  
+  /* .status-ok {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background-color: green;
+    border-radius: 50%;
+  } */
+  
+  /* .status-fail {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background-color: red;
+    border-radius: 50%;
+  } */
+  
+  .sensor-date {
+    font-size: 12px;
+    color: #555;
+    margin-top: 5px;
+  }
+  .sensor-status {
+    border: none;  /* מסיר את המסגרת */
+    background: none;  /* מסיר את הרקע */
+    cursor: pointer;  /* מסמן שזה כפתור */
+    padding: 0;  /* מסיר רווחים מיותרים */
+    outline: none;  /* מסיר את המסגרת שמופיעה בלחיצה */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .sensor-status span {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+  }
+  
+  .status-ok {
+    background-color: green;
+  }
+  
+  .status-fail {
+    background-color: red;
+  }
+  

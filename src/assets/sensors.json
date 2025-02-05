@@ -1,0 +1,102 @@
+ [
+      {
+        "InstallDate": "2025-01-13T20:31:12.833Z",
+        "DeviceOK": 1,
+        "DeviceTypeHebrew": "גלאי תנועה",
+        "DeviceId": "1",
+        "DeviceType": "Motion",
+        "WebSiteDeviceName": "גלאי תנועה לחדר ארונות",
+        "LastReportDate": "2025-01-24 04:18:50",
+        "Picture": "motion_hanxi"       
+      },
+      {
+        "InstallDate": "2025-01-13T20:39:45.24Z",
+        "DeviceOK": 1,       
+        "DeviceTypeHebrew": "גלאי תנועה",
+        "DeviceId": "2",
+        "DeviceType": "Motion",
+        "WebSiteDeviceName": "גלאי תנועה לחדר אמבטיה",
+        "LastReportDate": "2025-01-24 04:18:50",
+        "Picture": "motion_philio"
+      },
+      {
+        "InstallDate": "2025-01-13T20:41:13.71Z",
+        "DeviceOK": 1,
+        "DeviceTypeHebrew": "גלאי דלת/חלון",
+        "DeviceId": "3",
+        "DeviceType": "Contact",
+        "WebSiteDeviceName": "חיישן דלת כניסה",
+        "LastReportDate": "2025-01-24 04:18:50",
+        "Picture": "contact_hanxi"
+      },
+      {
+        "InstallDate": "2025-01-27T19:21:54.1Z",
+        "DeviceOK": 1,
+        "DeviceTypeHebrew": "גלאי דלת/חלון",
+        "DeviceId": "4",
+        "DeviceType": "Contact",
+        "WebSiteDeviceName": "חיישן דלת מרפסת",
+        "LastReportDate": "2025-01-27 14:21:54",
+        "Picture": "contact_hanxi"
+      },
+      {
+        "InstallDate": "2025-01-13T22:16:52.317Z",
+        "DeviceOK": 1,
+        "DeviceTypeHebrew": "גלאי הצפה",
+        "DeviceId": "5",
+        "DeviceType": "Water",
+        "WebSiteDeviceName": "חיישן הצפה",
+        "LastReportDate": "2025-01-24 04:18:50",
+        "Picture": "water_philio"
+      },
+      {
+        "InstallDate": "2025-01-24T13:41:44.14Z",
+        "DeviceOK": 1,
+        "DeviceTypeHebrew": "בקר דוד",
+        "DeviceId": "1200",
+        "DeviceType": "Boiler",
+        "WebSiteDeviceName": "דוד",
+        "LastReportDate": "2025-01-24 09:41:44",
+        "Picture": "boiler_mco_rect"
+      },
+      {
+        "InstallDate": "2025-01-24T14:46:32.787Z",
+        "DeviceOK": 0,
+        "DeviceTypeHebrew": "בקר תאורה",
+        "DeviceId": "1201",
+        "DeviceType": "ZwaveLight",
+        "WebSiteDeviceName": "בקר תאורה למרפסת שמש",
+        "LastReportDate": "2025-01-24 10:46:32",
+        "Picture": "zwavelight_mcohome_rect"
+      },
+      {
+        "InstallDate": "2025-01-24T14:46:41.39Z",
+        "DeviceOK": 1,
+        "DeviceTypeHebrew": "בקר תאורה",
+        "DeviceId": "1202",
+        "DeviceType": "ZwaveLight",
+        "WebSiteDeviceName": "חיישן תאורת כניסה",
+        "LastReportDate": "2025-01-24 10:46:41",
+         "Picture": "zwavelight_mcohome_rect"
+      },
+      {       
+        "InstallDate": "2025-01-13T20:59:11.21Z",
+        "DeviceOK": 1,
+        "DeviceTypeHebrew": "מצלמה",
+        "DeviceId": "2048",
+        "DeviceType": "Camera",
+        "WebSiteDeviceName": "מצלמת רשת ביתית",
+        "LastReportDate": "2025-01-13 15:59:11",
+        "Picture": "motion_hanxi"
+      },
+      {
+        "InstallDate": "2025-01-24T14:46:32.787Z",
+        "DeviceOK": 0,
+        "DeviceTypeHebrew": "בקר תאורה",
+        "DeviceId": "2049",
+        "DeviceType": "ZwaveLight",
+        "WebSiteDeviceName": "חיישן תאורת מרפסת שירות",
+        "LastReportDate": "2025-01-24 10:46:32",
+        "Picture": "zwavelight_mcohome_rect"
+      }
+]
