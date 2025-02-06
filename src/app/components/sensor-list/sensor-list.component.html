@@ -1,40 +1,39 @@
-
-
+<!-- Filter sensor component -->
 <app-filter-sensor
   [deviceNames]="deviceNames"
   [availableDates]="availableDates"
-  (filterApplied)="filterApplied($event)"
+  (filterApplied)="onFilterApplied($event)"
   (filterCleared)="onFilterCleared()"
 ></app-filter-sensor>
 
-    
+<!-- Header displaying sensor stats -->
 <div class="header">
-    <h2>
-        סה"כ {{ totalSensors$ | async }} חיישנים,
-        {{ workingSensors$ | async }} תקינים,
-        {{ faultySensors$ | async }} לא תקינים
-    </h2>
+  <h2>
+    סה"כ {{ totalSensors$ | async }} חיישנים,
+    {{ workingSensors$ | async }} תקינים,
+    {{ faultySensors$ | async }} לא תקינים
+  </h2>
 </div>
 
+<!-- Sensor grid displaying individual sensor cards -->
 <div class="sensor-grid">
-    <mat-card *ngFor="let sensor of filteredSensors$ | async" class="sensor-card">
-        <div class="sensor-content">
-            <img [src]="'assets/sensors/' + sensor.Picture + '.png'" [alt]="sensor.DeviceTypeHebrew"
-                class="sensor-image">
+  <mat-card *ngFor="let sensor of filteredSensors$ | async" class="sensor-card">
+    <div class="sensor-content">
+      <img [src]="'assets/sensors/' + sensor.Picture + '.png'" [alt]="sensor.DeviceTypeHebrew" class="sensor-image">
+      <div class="sensor-name">{{ sensor.WebSiteDeviceName }}</div>
 
-            <div class="sensor-name">{{ sensor.WebSiteDeviceName }}</div>
+      <button class="sensor-status" (click)="toggleStatus(sensor)">
+        <span [ngClass]="sensor.DeviceOK ? 'status-ok' : 'status-fail'"></span>
+      </button>
 
-            <button class="sensor-status" (click)="toggleStatus(sensor)">
-                <span [ngClass]="sensor.DeviceOK ? 'status-ok' : 'status-fail'"></span>
-            </button>
+      <div class="sensor-date">
+        תאריך עדכון אחרון: {{ sensor.LastReportDate }}
+      </div>
+    </div>
+  </mat-card>
 
-
-            <div class="sensor-date">
-                תאריך עדכון אחרון: {{ sensor.LastReportDate }}
-            </div>
-        </div>
-    </mat-card>
-    <button mat-raised-button color="primary" (click)="navigateToAdd()">
-        הוספת חיישן
-    </button>
+  <!-- Add sensor button -->
+  <button mat-raised-button color="primary" (click)="navigateToAdd()">
+    הוספת חיישן
+  </button>
 </div>

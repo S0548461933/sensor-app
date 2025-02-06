@@ -2,7 +2,7 @@
     <!-- סינון לפי שם התקן -->
     <mat-form-field class="filter-field">
       <mat-label>סנן לפי שם התקן</mat-label>
-      <mat-select [(ngModel)]="filter.deviceName" (selectionChange)="applyFilter()">
+      <mat-select [(ngModel)]="filter.deviceName">
         <mat-option value="">הכל</mat-option>
         <mat-option *ngFor="let name of deviceNames" [value]="name">
           {{ name }}

@@ -6,23 +6,24 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
   styleUrls: ['./filter-sensor.component.css']
 })
 export class FilterSensorComponent {
-
   @Input() deviceNames: string[] = [];
   @Input() availableDates: string[] = ['היום', 'שבוע אחרון', 'חודש אחרון'];
-// משתנים שישמשו לשמירת ערכי הסינון
+
+  // משתנים לשמירת ערכי הסינון
   filter = { deviceName: '', dateRange: '' };
 
   @Output() filterApplied = new EventEmitter<{ deviceName: string; dateRange: string }>();
   @Output() filterCleared = new EventEmitter<void>();
 
-
-  applyFilter() {
+  // הפעלת הסינון
+  applyFilter(): void {
     this.filterApplied.emit(this.filter);
   }
 
-  clearFilter() {
-    // איפוס הקריטריונים המקומיים
+  // ניקוי הסינון
+  clearFilter(): void {
     this.filter = { deviceName: '', dateRange: '' };
     this.filterCleared.emit();
   }
 }
+

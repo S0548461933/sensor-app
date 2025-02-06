@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SensorListComponent } from './components/sensor-list/sensor-list.component';
-import { SensorItemComponent } from './components/sensor-item/sensor-item.component';
 import { AddSensorComponent } from './components/add-sensor/add-sensor.component';
 
 const routes: Routes = [

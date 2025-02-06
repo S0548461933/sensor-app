@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable,BehaviorSubject, tap } from 'rxjs';
+import { Observable, BehaviorSubject, tap } from 'rxjs';
 
 export interface Sensor {
   InstallDate: string;
@@ -12,74 +12,53 @@ export interface Sensor {
   LastReportDate: string;
   Picture: string;
 }
+
 @Injectable({
   providedIn: 'root'
 })
 export class SensorService {
-  
   private sensorsUrl = 'assets/sensors.json';
-  private sensors: Sensor[] = [];  
   private sensorsSubject = new BehaviorSubject<Sensor[]>([]);
   sensors$ = this.sensorsSubject.asObservable();
 
-
   constructor(private http: HttpClient) {
-        this.loadSensors().subscribe();
+    this.loadSensors().subscribe();
+  }
 
-   }
-
-  loadSensors(): Observable<Sensor[]> {
+  private loadSensors(): Observable<Sensor[]> {
     return this.http.get<Sensor[]>(this.sensorsUrl).pipe(
-      tap(data => {
-        this.sensors = data;
-        this.sensorsSubject.next(data);
-      })
+      tap(data => this.sensorsSubject.next(data))
     );
   }
 
-  addSensor(newSensor: Sensor) {
-    const maxId = this.getHighestDeviceId();
-    newSensor.DeviceId = (maxId + 1).toString();
-    this.sensors.push(newSensor);
-    this.sensorsSubject.next(this.sensors);
-    // הדפסה של מחרוזת JSON לבדיקות במידה ונדרש
+  addSensor(newSensor: Sensor): void {
+    newSensor.DeviceId = (this.getHighestDeviceId() + 1).toString();
+    this.sensorsSubject.next([...this.sensorsSubject.value, newSensor]);
     console.log(this.getJsonString());
   }
 
-  getHighestDeviceId(): number {
-    const sensors = this.sensorsSubject.value;
-    if (!sensors || sensors.length === 0) {
-      return 0;
-    }
-    // המרה ממחרוזת למספר ובחירת המספר הגבוה ביותר
-    const ids = sensors.map(sensor => Number(sensor.DeviceId));
-    return Math.max(...ids);
-  }
-  
-  getJsonString(): string {
-    return JSON.stringify(this.sensors);
+  private getHighestDeviceId(): number {
+    const ids = this.sensorsSubject.value.map(sensor => Number(sensor.DeviceId));
+    return ids.length ? Math.max(...ids) : 0;
   }
 
-  
-  toggleStatus(sensor: Sensor) {
-    const now = new Date();
-  
-    const offset = now.getTimezoneOffset() * 60000;
-    
-    // חישוב השעה לפי שעון ישראל 
-    const israelTime = new Date(now.getTime() - offset + ( 60 * 60));
-  
-    const sensors = this.sensorsSubject.value.map(s =>
+  private getJsonString(): string {
+    return JSON.stringify(this.sensorsSubject.value);
+  }
+
+  toggleStatus(sensor: Sensor): void {
+    const updatedSensors = this.sensorsSubject.value.map(s => 
       s.DeviceId === sensor.DeviceId
-        ? { 
-            ...s, 
-            DeviceOK: s.DeviceOK === 1 ? 0 : 1, 
-            LastReportDate: israelTime.toISOString().replace("T", " ").split(".")[0] 
-          }
+        ? { ...s, DeviceOK: s.DeviceOK === 1 ? 0 : 1, LastReportDate: this.getIsraelTime() }
         : s
     );
-  
-    this.sensorsSubject.next(sensors);
+    this.sensorsSubject.next(updatedSensors);
   }
- 
+
+  private getIsraelTime(): string {
+    const now = new Date();
+    const israelOffset = 60 * 60 * 1000; // Israel time offset (1 hour)
+    const israelTime = new Date(now.getTime() - now.getTimezoneOffset() * 60000 + israelOffset);
+    return israelTime.toISOString().replace("T", " ").split(".")[0];
+  }
 }
