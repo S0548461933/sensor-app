@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { SensorService, Sensor } from '../../services/sensor.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Sensor, SensorService } from 'src/app/services/sensor.service';
 
 @Component({
   selector: 'app-add-sensor',
@@ -20,13 +20,13 @@ export class AddSensorComponent {
     LastReportDate: new Date().toISOString().replace("T", " ").split(".")[0],
     Picture: 'default' // ניתן לשנות לתמונה קיימת
   };
-  imageNames = [{ value: 'boiler_mco_rect.png', viewValue: 'תמונה 1' },
+  imageNames = [{ value: 'boiler_mco_rect', viewValue: 'תמונה 1' },
   { value: 'camera_viv', viewValue: 'תמונה 2' },
   { value: 'contact_hanxi', viewValue: 'תמונה 3' },
   { value: 'motion_hanxi', viewValue: 'תמונה 4' },
   { value: 'motion_philio', viewValue: 'תמונה 5' },
   { value: 'water_philio', viewValue: 'תמונה 6' },
-  { value: 'zwavelight_mcohome_rect]', viewValue: 'תמונה 7' }
+  { value: 'zwavelight_mcohome_rect', viewValue: 'תמונה 7' }
   ]
 
 

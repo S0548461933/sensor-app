@@ -1,0 +1,27 @@
+<div class="filter-section">
+    <!-- סינון לפי שם התקן -->
+    <mat-form-field class="filter-field">
+      <mat-label>סנן לפי שם התקן</mat-label>
+      <mat-select [(ngModel)]="filter.deviceName" (selectionChange)="applyFilter()">
+        <mat-option value="">הכל</mat-option>
+        <mat-option *ngFor="let name of deviceNames" [value]="name">
+          {{ name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+
+    <!-- סינון לפי טווח תאריכים -->
+    <mat-form-field class="filter-field">
+      <mat-label>סנן לפי תאריך עדכון</mat-label>
+      <mat-select [(ngModel)]="filter.dateRange">
+        <mat-option value="">הכל</mat-option>
+        <mat-option *ngFor="let date of availableDates" [value]="date">
+          {{ date }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="applyFilter()">החל סינון</button>
+    <button mat-raised-button color="warn" (click)="clearFilter()">נקה סינון</button>
+  </div>

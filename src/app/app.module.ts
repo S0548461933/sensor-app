@@ -19,12 +19,14 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
+import { FilterSensorComponent } from './components/filter-sensor/filter-sensor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SensorListComponent,
     AddSensorComponent,
+    FilterSensorComponent
 
   ],
   imports: [

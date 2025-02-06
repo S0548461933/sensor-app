@@ -18,11 +18,7 @@
         <!-- סוג מכשיר (אנגלית) -->
         <mat-form-field class="full-width">
           <mat-label>סוג מכשיר (אנגלית)</mat-label>
-          <input
-            matInput
-            [(ngModel)]="newSensor.DeviceType"
-            (keypress)="allowOnlyEnglishLetters($event)"
-          >
+          <input matInput [(ngModel)]="newSensor.DeviceType" (keypress)="allowOnlyEnglishLetters($event)">
         </mat-form-field>
   
         <!-- סטטוס -->
@@ -37,18 +33,20 @@
         <!-- בחר תמונה -->
         <mat-form-field class="full-width">
           <mat-label>בחר תמונה</mat-label>
-          <select matNativeControl [(ngModel)]="newSensor.Picture" name="picture">
-            <option value="" selected></option> <!-- אופציה ריקה ברירת מחדל -->
-            <option *ngFor="let image of imageNames" [value]="image.value">
-              <img [src]="'assets/sensors/' + image.value + '.png'" alt="תמונה" width="50" height="50"> 
-              
-              {{ image.viewValue }}
-            </option>
-          </select>
+          <mat-select [(ngModel)]="newSensor.Picture" name="picture">
+            <mat-option value="">
+              <img *ngIf="!newSensor.Picture" [src]="'assets/sensors/' + imageNames[0].value" alt="תמונה" width="50" height="50">
+              <span>בחר תמונה</span>
+            </mat-option>
+            <mat-option *ngFor="let image of imageNames" [value]="image.value">
+              <img [src]="'assets/sensors/' + image.value + '.png'" alt="תמונה" width="50" height="50">
+              {{ image.value }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
         
-        <p class="selected-image-text">תמונה שנבחרה: {{newSensor.Picture}}</p>
-        <img *ngIf="newSensor.Picture!='default'"[src]="'assets/sensors/' + newSensor.Picture + '.png'" alt="תמונה" width="50" height="50"> 
+        <p *ngIf="newSensor.Picture != 'default'" class="selected-image-text">תמונה שנבחרה: {{newSensor.Picture}}</p>
+        <img *ngIf="newSensor.Picture != 'default'" [src]="'assets/sensors/' + newSensor.Picture + '.png'" alt="תמונה" width="50" height="50"> 
 
         <!-- כפתורים -->
         <div class="button-container">
@@ -57,5 +55,4 @@
         </div>
       </div>
     </mat-card-content>
-  </mat-card>
-  
+</mat-card>

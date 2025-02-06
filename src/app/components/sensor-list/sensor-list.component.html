@@ -1,32 +1,13 @@
-<div class="filter-section">
-  <!-- סינון לפי שם התקן -->
-  <mat-form-field class="filter-field">
-    <mat-label>סנן לפי שם התקן</mat-label>
-    <mat-select [(ngModel)]="filter.deviceName" placeholder="בחר שם התקן">
-      <mat-option value="">הכל</mat-option>
-      <mat-option *ngFor="let sensor of sensors$ | async" [value]="sensor.WebSiteDeviceName">
-        {{ sensor.WebSiteDeviceName }}
-      </mat-option>      
-    </mat-select>
-  </mat-form-field>
 
-  <!-- סינון לפי טווח תאריכים -->
-  <mat-form-field class="filter-field">
-    <mat-label>סנן לפי תאריך עדכון</mat-label>
-    <mat-select [(ngModel)]="filter.dateRange" placeholder="בחר תאריך עדכון">
-      <mat-option value="">הכל</mat-option>
-      <mat-option *ngFor="let date of availableDates" [value]="date">
-        {{ date }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
 
-  <button mat-raised-button color="primary" (click)="applyFilters()">החל סינון</button>
-  <button mat-raised-button color="warn" (click)="clearFilters()">נקה סינון</button>
+<app-filter-sensor
+  [deviceNames]="deviceNames"
+  [availableDates]="availableDates"
+  (filterApplied)="filterApplied($event)"
+  (filterCleared)="onFilterCleared()"
+></app-filter-sensor>
 
-</div>
-  
-
+    
 <div class="header">
     <h2>
         סה"כ {{ totalSensors$ | async }} חיישנים,
@@ -35,7 +16,6 @@
     </h2>
 </div>
 
-<!-- רשת עם חיישנים -->
 <div class="sensor-grid">
     <mat-card *ngFor="let sensor of filteredSensors$ | async" class="sensor-card">
         <div class="sensor-content">

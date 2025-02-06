@@ -6,7 +6,8 @@ import { map, Observable } from 'rxjs';
 @Component({
   selector: 'app-sensor-list',
   templateUrl: './sensor-list.component.html',
-  styleUrls: ['./sensor-list.component.css']
+  styleUrls: ['./sensor-list.component.css'],
+ 
 })
 export class SensorListComponent implements OnInit{
   sensors$!: Observable<Sensor[]>;
@@ -21,13 +22,13 @@ export class SensorListComponent implements OnInit{
   };
 
   availableDates = ['היום', 'שבוע אחרון', 'חודש אחרון']; 
+  deviceNames: string[] = [];
 
-  constructor(private sensorService: SensorService, private router: Router) {
-    
-   }
+  constructor(private sensorService: SensorService, private router: Router) { }
   ngOnInit(): void {
     // קבלת החיישנים מהסרוויס
     this.sensors$ = this.sensorService.sensors$;
+    this.filteredSensors$ = this.sensors$;
 
     // חישוב מספר החיישנים הכולל, התקינים והתקולים
     this.totalSensors$ = this.sensors$.pipe(map(sensors => sensors.length));
@@ -35,9 +36,12 @@ export class SensorListComponent implements OnInit{
     this.faultySensors$ = this.sensors$.pipe(map(sensors => sensors.filter(s => s.DeviceOK !== 1).length));
 
     this.filteredSensors$ = this.sensors$;
+ // אתחול deviceNames עם שמות ההתקנים הייחודיים
+ this.sensors$.subscribe(sensors => {
+  this.deviceNames = Array.from(new Set(sensors.map(sensor => sensor.WebSiteDeviceName)));
+});
 
   }
-
   applyFilters() {
     this.filteredSensors$ = this.sensors$.pipe(
       map(sensors => {
@@ -49,7 +53,32 @@ export class SensorListComponent implements OnInit{
       })
     );
   }
-
+  // applyFilters() {
+  //   this.filteredSensors$ = this.sensors$.pipe(
+  //     map(sensors => sensors.filter(sensor => {
+  //       const matchesName = this.filter.deviceName ? sensor.WebSiteDeviceName === this.filter.deviceName : true;
+  //       const matchesDate = this.filter.dateRange ? this.checkDateRange(sensor.LastReportDate) : true;
+  //       return matchesName && matchesDate;
+  //     }))
+  //   );
+  // }
+  onFilterApplied(criteria: { deviceName: string; dateRange: string }) {
+    this.filter = criteria;
+    this.filterApplied({ deviceName: 'exampleName', dateRange: 'exampleRange' });
+  }
+  
+  onFilterCleared() {
+    this.filter = { deviceName: '', dateRange: '' };
+    this.applyFilters();
+  }
+  
+  
+  filterApplied(criteria: { deviceName: string; dateRange: string }) {
+    this.filter = criteria;
+    this.applyFilters();
+  }
+  
+  
   checkDateRange(date: string): boolean {
     const currentDate = new Date();
     const sensorDate = new Date(date);
@@ -67,14 +96,11 @@ export class SensorListComponent implements OnInit{
     }
     return true;
   }
-  clearFilters() {
-    // איפוס הערכים הממויינים
-    this.filter.deviceName = '';
-    this.filter.dateRange = '';
-    // הצגת כל החיישנים
+
+
+  clearFilter() {
     this.filteredSensors$ = this.sensors$;
   }
- 
   toggleStatus(sensor: Sensor) {
     this.sensorService.toggleStatus(sensor);
   }
